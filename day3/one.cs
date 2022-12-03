@@ -16,7 +16,7 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"
 		.Split('\n')
 		.Select(Half)
-		.Select(t => t.Item1.Intersect(t.Item2).First())
+		.Select(t => t.Item1.Intersect(t.Item2).Single())
 		.Sum(Prioritize)
 		.Dump();
 	}
