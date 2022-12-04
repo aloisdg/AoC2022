@@ -1,5 +1,3 @@
-// https://tio.run/##bY3PDsIgDIfvPEXjZRA3gs6/Webdd9hhbCNmBoEAmr39pNODBy9f2v7ar3f5kqH3o4uFsYOa596aECFADe1GCEG2iBJBdgv3yMNSHpEnxHnp8UC0FSEfiU@SwIPTY6SrxjRmxfhDOjpBfYHpG2SNyRj3anj2ilKZQ8cwdtIHdTWRpnYNaSwYq4jnwfr4s9ZBATIF@NBqxbW90bSkxyQTOZR/zDL5uiSb5zc
-
 const s = `1000
 2000
 3000
