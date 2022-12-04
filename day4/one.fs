@@ -11,6 +11,6 @@ let s = """2-4,6-8
 2-6,4-8"""
 
 s.Split '\n'
-|> Array.map(fun x -> x.Split([|','; '-'|]) |> Array.map int)
+|> Array.map (fun x -> x.Split [|','; '-'|] |> Array.map int)
 |> count(fun x -> isSubRange x.[0] x.[1] x.[2] x.[3])
 |> printfn "%i"
