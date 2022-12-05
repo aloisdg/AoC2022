@@ -24,7 +24,7 @@ move 1 from 1 to 2";
 	
 		var stacks = state
 			.SkipLast(1)
-			.Select(row => row.Where((x, i) => (i - 1) % 4 == 0))
+			.Select(row => row.Where((_, i) => (i - 1) % 4 == 0))
 			.Transpose()
 			.Select(col => col.Where(c => c != ' '))
 			.Select(col => new Stack<char>(col.Reverse()))
