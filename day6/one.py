@@ -3,7 +3,7 @@ def find_marker_index(signal, marker):
 		if len(set(signal[i:i+marker])) == marker:
 			return i + marker
 
-	return -1;
+	return -1
 
 s = "bvwbjplbgvbhsrlpgdmjqwftvncz"
 marker = 4
