@@ -5,15 +5,20 @@ public class Program
 {
 	public static void Main()
 	{
-		var s = "mjqjpqmgbljsphdztnvjfqwrcgsmlb";
-
-		for (var i = 0; i < s.Length; i++)
+		var s = "bvwbjplbgvbhsrlpgdmjqwftvncz";
+		var maker = 4;
+		FindMakerIndex(s, maker).Dump();
+	}
+	
+	public static int FindMakerIndex(string signal, int maker)
+	{
+		for (var i = 0; i < signal.Length; i++)
 		{
-			if (s.Substring(i, 4).Distinct().Count() == 4)
+			if (signal.Substring(i, maker).Distinct().Count() == maker)
 			{
-				Console.WriteLine(i + 4);
-				return;
+				return i + maker;
 			}
 		}
+		return -1;
 	}
 }
