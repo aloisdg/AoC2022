@@ -21,4 +21,14 @@ public class Program
 		}
 		return -1;
 	}
+	
+	// for fun
+	public static int FindMarkerIndexRec(string signal, int marker)
+	{
+		int loop(int i) => signal.Substring(i, marker).Distinct().Count() == marker
+			? i + marker
+			: loop(i + 1);
+		
+		return loop(0);
+	}
 }
