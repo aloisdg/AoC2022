@@ -24,6 +24,12 @@ void d_putnumber(int n)
 	}
 }
 
+void d_putnumber_ln(int n)
+{
+	d_putnumber(n);
+	d_putchar('\n');
+}
+
 int d_strlen(char *str)
 {
 	int i;
@@ -31,31 +37,31 @@ int d_strlen(char *str)
 	return i;
 }
 
-int isDistinctive(char *str, int maker, int start)
+int has_duplicate(char *str, int marker, int start)
 {
-	for (int i = start; i < maker; i++)
+	for (int i = 0; i < marker; i++)
 	{
-		for (int j = i + 1; j < maker; j++)
+		for (int j = i + 1; j < marker; j++)
 		{
-			if (str[i] == str[j])
+			if (str[start + i] == str[start + j])
 			{
-				return 0;
+				return 1;
 			}
 		}
 	}
 
-	return 1;
+	return 0;
 }
 
-int findMakerIndex(char *signal, int maker)
+int find_marker(char *signal, int marker)
 {
 	int length = d_strlen(signal);
 
 	for (int i = 0; i < length; i++)
 	{
-		if (isDistinctive(signal, maker, i) == 1)
+		if (has_duplicate(signal, marker, i) == 0)
 		{
-			return i + maker;
+			return i + marker;
 		}
 	}
 
@@ -64,8 +70,12 @@ int findMakerIndex(char *signal, int maker)
 
 int main()
 {
-	char *signal = "nppdvjthqldpwncqszvftbrmjlhg";
-	int maker = 14;
-	d_putnumber(findMakerIndex(signal, maker));
+	int marker = 14;
+
+	d_putnumber_ln(find_marker("mjqjpqmgbljsphdztnvjfqwrcgsmlb", marker));	// 19
+	d_putnumber_ln(find_marker("bvwbjplbgvbhsrlpgdmjqwftvncz", marker));	// 23
+	d_putnumber_ln(find_marker("nppdvjthqldpwncqszvftbrmjlhg", marker));	// 23
+	d_putnumber_ln(find_marker("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", marker));	// 29
+	d_putnumber_ln(find_marker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", marker));	// 26
 	return 0;
 }
