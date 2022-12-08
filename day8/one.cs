@@ -2,9 +2,7 @@ using System;
 using System.Linq;
 					
 public class Program
-{
-	record struct Tree(int height, bool? isVisible);
-	
+{	
 	public static void Main()
 	{
 		var s = @"
@@ -83,26 +81,24 @@ public class Program
 		Console.WriteLine("{0} actual {1} expected {2}", CountVisible(s) == 21  , CountVisible(s), 21);
 	}
 	
-	private static Tree[][] ParseMatrix(string source) =>
+	private static int[][] ParseMatrix(string source) =>
 		source
 			.Trim()
 			.Split("\n")
-			.Select(xr => xr.Select(s => s - '0')
-						.Select(i => new Tree(i, null))
-						.ToArray())
+			.Select(xr => xr.Select(s => s - '0').ToArray())
 			.ToArray();
 	
-	private static bool IsVisibleFromTheLeft(Tree[][] matrix, int col, int row, int treeHeight) =>
-		Enumerable.Range(0, col).Select(x => matrix[row][x].height).All(h => h < treeHeight);
+	private static bool IsVisibleFromTheLeft(int[][] matrix, int col, int row) =>
+		Enumerable.Range(0, col).All(x => matrix[row][x] < matrix[row][col]);
 	
-	private static bool IsVisibleFromTheTop(Tree[][] matrix, int col, int row, int treeHeight) =>
-		Enumerable.Range(0, row).Select(x => matrix[x][col].height).All(x => x < treeHeight);
+	private static bool IsVisibleFromTheTop(int[][] matrix, int col, int row) =>
+		Enumerable.Range(0, row).All(x => matrix[x][col] < matrix[row][col]);
 	
-	private static bool IsVisibleFromTheRight(Tree[][] matrix, int col, int row, int treeHeight, int matrixWidth) =>
-		Enumerable.Range(col + 1, matrixWidth - col - 1).Select(x => matrix[row][x].height).All(x => x < treeHeight);
+	private static bool IsVisibleFromTheRight(int[][] matrix, int col, int row, int matrixWidth) =>
+		Enumerable.Range(col + 1, matrixWidth - col - 1).All(x => matrix[row][x] < matrix[row][col]);
 	
-	private static bool IsVisibleFromTheBottom(Tree[][] matrix, int col, int row, int treeHeight, int matrixHeight) =>
-		Enumerable.Range(row + 1, matrixHeight - row - 1).Select(x => matrix[x][col].height).All(x => x < treeHeight);
+	private static bool IsVisibleFromTheBottom(int[][] matrix, int col, int row, int matrixHeight) =>
+		Enumerable.Range(row + 1, matrixHeight - row - 1).All(x => matrix[x][col] < matrix[row][col]);
 		
 	private static int CountVisible(string source)
 	{
@@ -114,19 +110,11 @@ public class Program
 		{
 			for (var col = 1; col < matrixWidth - 1; col++)
 			{
-					/*
-					if ((matrix[i][j].height > matrix[i - 1][j].height && matrix[i - 1][j].isVisible == true)
-						|| (matrix[i][j].height > matrix[i][j -1].height && matrix[i][j -1].isVisible == true))
-					{
-						matrix[i][j].isVisible = true;
-						continue;
-					}*/
-					var treeHeight = matrix[row][col].height;
 					var isVisible =
-						   IsVisibleFromTheLeft(matrix, col, row, treeHeight)
-						|| IsVisibleFromTheTop(matrix, col, row, treeHeight)
-						|| IsVisibleFromTheRight(matrix, col, row, treeHeight, matrixWidth)
-						|| IsVisibleFromTheBottom(matrix, col, row, treeHeight, matrixHeight);
+						   IsVisibleFromTheLeft(matrix, col, row)
+						|| IsVisibleFromTheTop(matrix, col, row)
+						|| IsVisibleFromTheRight(matrix, col, row, matrixWidth)
+						|| IsVisibleFromTheBottom(matrix, col, row, matrixHeight);
 					if (isVisible)
 					{
 						visibleQuantity++;
@@ -134,5 +122,6 @@ public class Program
 			}
 		}
 		return visibleQuantity;
+
 	}
 }
